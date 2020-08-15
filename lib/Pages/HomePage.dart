@@ -23,8 +23,17 @@ class HomeScreen extends StatefulWidget {
 }
 
 class HomeScreenState extends State<HomeScreen> {
+//HomePageFunctions
+homePageHeader(){
+return AppBar(
+  automaticallyImplyLeading: false, //removes back button
+  actions: <Widget>[
+    IconButton(icon: Icon(Icons.settings_applications,size:30,color:Colors.white), onPressed:(){ Navigator.push(context, MaterialPageRoute(builder: (context)=>Settings()));}
+    )]
+);
+}
 
-
+//signin functions
   final GoogleSignIn googleSignIn= GoogleSignIn();
 Future<Null> logoutUser()async{
   await FirebaseAuth.instance.signOut();
@@ -37,11 +46,15 @@ Future<Null> logoutUser()async{
 
   @override
   Widget build(BuildContext context) {
-    return RaisedButton.icon(
-      onPressed: (logoutUser),
+    
+    // RaisedButton.icon(
+    
+    return Scaffold(
+      appBar: homePageHeader(),
+      body: RaisedButton.icon(  onPressed: (logoutUser),
        icon: Icon(Icons.power_settings_new),
-        label: Text('Log Out'));
-
+        label: Text('Log Out')),
+    );
   }
 }
 
